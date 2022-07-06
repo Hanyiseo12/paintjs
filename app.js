@@ -5,6 +5,7 @@ const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave");
 const resetBtn = document.getElementById("jsReset");
+const clearBtn = document.getElementById("jsClear");
 
 const INITIAL_COLOR = "#2c2c2c";
 const CANVAS_SIZE = 700;
@@ -39,6 +40,18 @@ function onMouseMove(event) {
   }
 }
 
+function clearLine(event) {
+  const x = event.offsetX;
+  const y = event.offsetY;
+  ctx.strokeStyle = "white";
+  if (!painting) {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  } else {
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  }
+}
 function handleColorClick(event) {
   const color = event.target.style.backgroundColor;
   ctx.strokeStyle = color;
@@ -117,3 +130,7 @@ if (resetBtn) {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
   );
 }*/
+
+if (clearBtn) {
+  clearBtn.addEventListener("click", clearLine);
+}
