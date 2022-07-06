@@ -4,6 +4,7 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave");
+const resetBtn = document.getElementById("jsReset");
 
 const INITIAL_COLOR = "#2c2c2c";
 const CANVAS_SIZE = 700;
@@ -71,6 +72,16 @@ function handleSaveClick(event) {
   link.download = "PaintJS[🎨]";
   link.click();
 }
+
+function handleResetClick(event) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+/*아예 reload 시키는 방법
+function handleResetClick(event) {
+  location.reload();
+}
+*/
+
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
@@ -95,3 +106,14 @@ if (mode) {
 if (saveBtn) {
   saveBtn.addEventListener("click", handleSaveClick);
 }
+
+if (resetBtn) {
+  resetBtn.addEventListener("click", handleResetClick);
+}
+
+/* 위에서 작동되는 코드 및 함수와 동일
+if (resetBtn) {
+  resetBtn.addEventListener("click", () =>
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+  );
+}*/
